@@ -1,3 +1,5 @@
+//clion 에서 예제 다 돌아가나 백준에서 런타임 오류
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
