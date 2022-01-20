@@ -4,57 +4,49 @@
 
 using namespace std;
 
-int L;
+int R;
 int C;
-vector<char> v;
-vector<char> tmpv;
 
+int dy[] = {0, 1};
+int dx[] = {1, 0};
 
-void DFS(int now, int count)
+char map[20][20];
+int alpha[26];
+int MAX = 0;
+
+void DFS(int r, int c, int count)
 {
-    int ae = 0;
-    int bc = 0;
-
-    if(count == L) {
-        for(auto & j : tmpv)
-        {
-            if (j == 'a' || j == 'e' || j == 'i' || j == 'o' || j == 'u')
-                ae += 1;
-            else
-                bc += 1;
-        }
-        if (ae >= 1 && bc >= 2) {
-            for (auto &j : tmpv)
-                cout << j;
-            cout << endl;
-        }
+    if (alpha[map[r][c] - 'A'] == 1)
+    {
+        if(count > MAX)
+            MAX = count;
+        alpha[map[r][c] - 'A'] = 0;
         return;
     }
-    for(int i = now+1; i < C; i++)
+    alpha[map[r][c] - 'A'] = 1;
+
+    for(int i = 0; i < 2; i++)
     {
-        tmpv.push_back(v[i]);
-        DFS(i, count + 1);
-        tmpv.pop_back();
+        DFS(r + dy[i], c + dx[i]);
     }
 }
 
 int main() {
 
-    int i;
-    char tmp;
+    int r;
+    int c;
 
-    i = 0;
-    cin >> L >> C;
+    cin >> r >> c;
 
-    while(i < C)
+    for (int i = 0; i < r; i++)
     {
-        cin >> tmp;
-        v.push_back(tmp);
-        i++;
+        for (int j = 0; j < c; j++)
+        {
+            cin >> map[i][j];
+        }
     }
-    sort(v.begin(), v.end());
-    DFS(-1, 0);
 
-    //for(auto & k : v)
-    //    cout << k << endl;
+    DFS(0, 0, 0);
+    cout << MAX;
+
 }
