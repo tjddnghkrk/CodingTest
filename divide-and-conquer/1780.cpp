@@ -5,12 +5,18 @@ using namespace std;
 
 int num[3] = {0, };
 
-void Find(vector< vector<int> > v, int ystart, int yend, int xstart, int xend)
+void Find(vector< vector<int> > &v, int ystart, int yend, int xstart, int xend)
 {
 	int firstNum = v[ystart][xstart];
 	bool failCheck = false;
 	int i;
 	int j;
+
+	if (yend - ystart == 1)
+	{
+		num[firstNum + 1]++;
+		return;
+	}
 
 	for(i = ystart; i < yend; i++)
 	{
@@ -36,7 +42,7 @@ void Find(vector< vector<int> > v, int ystart, int yend, int xstart, int xend)
 
 	for (i = ystart; i < yend; i += gap)
 		for (j = xstart; j < xend; j += gap)
-			Find(v, ystart, i, xstart, j);
+			Find(v, i, i + gap, j, j + gap);
 }
 
 int main()
