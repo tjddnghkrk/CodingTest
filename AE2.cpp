@@ -9,10 +9,6 @@ using namespace std;
  * [1, 1], [2, 10], [4, 3], [5, 7] 처럼 겹쳐졌을 때 최대가 되는 수를 구해야 한다. 정렬되지 않음.
  *
  */
-bool comp(vector<int> a, vector<int> b)
-{
-	return (a[0] + a[1]) < (b[0] + b[1]);
-}
 
 int solution(vector<vector<int>> V)
 {
